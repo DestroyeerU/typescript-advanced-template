@@ -6,7 +6,7 @@ import { State } from './ducks/mystate_EXAMPLE/types';
 import rootSaga from './ducks/rootSagas';
 
 export interface ApplicationState {
-  mystates: State;
+  mystate: State;
 }
 
 const sagaMiddleware = createSagaMiddleware();
