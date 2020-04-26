@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 
-// import foo from './foo/reducers';
+import mystate from './mystate_EXAMPLE/reducers';
 
 const reducers = combineReducers({
-  // foo,
+  mystate,
 });
 
 export default reducers;
