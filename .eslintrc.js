@@ -31,7 +31,7 @@ module.exports = {
     'react/jsx-filename-extension': [
       'error',
       {
-        extensions: ['.tsx'],
+        extensions: ['.jsx', '.tsx'],
       },
     ],
     "import/extensions": [
@@ -49,7 +49,10 @@ module.exports = {
     '@typescript-eslint/explicit-member-accessibility': 'off',
 
     'react-hooks/rules-of-hooks': 'error',
-    'react-hooks/exhaustive-deps': 'error'
+    'react-hooks/exhaustive-deps': 'error',
+
+    "camelcase": "off",
+    '@typescript-eslint/camelcase': 'off',
   },
   settings: {
     'import/parsers': {
@@ -60,5 +63,3 @@ module.exports = {
     },
   },
 };
-
-
