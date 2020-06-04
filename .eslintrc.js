@@ -8,24 +8,30 @@ module.exports = {
     'react-app',
     'airbnb',
     'plugin:@typescript-eslint/recommended',
+
+    "plugin:react/recommended",
+
     'prettier/@typescript-eslint',
+    "plugin:prettier/recommended",
   ],
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
   },
+  parser: "@typescript-eslint/parser",
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
     },
-    ecmaVersion: 6,
+    ecmaVersion: 2020,
     sourceType: 'module',
   },
   plugins: [
     'react',
     'import',
     'jsx-a11y',
-    'react-hooks'
+    'react-hooks',
+    'prettier',
   ],
   rules: {
     'react/jsx-filename-extension': [
@@ -53,8 +59,12 @@ module.exports = {
 
     "camelcase": "off",
     '@typescript-eslint/camelcase': 'off',
+    'prettier/prettier': 'error',
   },
   settings: {
+    react: {
+      version: "detect" // Tells eslint-plugin-react to automatically detect the version of React to use
+    },
     'import/parsers': {
       '@typescript-eslint/parser': ['.ts', '.tsx'],
     },
