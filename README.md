@@ -1,7 +1,13 @@
 # typescript-advanced-template
-React template with eslint prettier redux/sagas configurations
+
+- [x] Typescript settings
+- [x] Eslint/Prettier
+- [x] Redux/Redux Sagas `typescript integration`
+- [x] Styled components
+
 
 # Usage
-Clone this repository  
-Run `yarn` on root directory  
+Clone this repository
+Delete `yarn.lock` and `yarn.error-log`
+Run `yarn` on root directory
 Run `yarn start`
