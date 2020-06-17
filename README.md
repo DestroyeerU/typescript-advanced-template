@@ -6,7 +6,7 @@
 - [x] Styled components
 
 
-# Usage
+## Usage
 Clone this repository
 Delete `yarn.lock` and `yarn.error-log`
 Run `yarn` on root directory
