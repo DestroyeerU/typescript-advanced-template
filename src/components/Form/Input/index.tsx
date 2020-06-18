@@ -1,20 +1,27 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useEffect, forwardRef } from 'react';
 import { useField } from '@unform/core';
 
-import { ContainerInput, InputElement, Error, Label } from '../Default/styles';
+import { IconType } from 'react-icons/lib';
+import { useSafeRef } from '~/hooks/native';
+import { Container, ContainerProps, StyledInput, Error, Label, InnerContainer } from './styles';
 
 type InputAttributes = Omit<React.InputHTMLAttributes<HTMLInputElement>, 'defaultValue' | 'value' | 'width'>;
 
 interface OwnProps {
   name: string;
   label?: string;
-  width?: number;
+  icon?: IconType;
+  onIconClick?: () => void;
 }
 
-type Props = OwnProps & InputAttributes;
+export type InputProps = OwnProps & ContainerProps & InputAttributes;
+export type InputRef = React.Ref<HTMLInputElement>;
 
-const Input = ({ name, label, type, width, ...rest }: Props) => {
-  const inputRef = useRef(null);
+const Input = (
+  { name, label, type, marginTop, marginBottom, marginLeft, marginRight, icon: Icon, onIconClick, ...rest }: InputProps,
+  ref: InputRef
+) => {
+  const inputRef = useSafeRef(ref);
   const { fieldName, registerField, defaultValue, error } = useField(name);
 
   useEffect(() => {
@@ -23,23 +30,34 @@ const Input = ({ name, label, type, width, ...rest }: Props) => {
       ref: inputRef.current,
       path: type === 'checkbox' ? 'checked' : 'value',
     });
-  }, [fieldName, registerField, type]);
+  }, [fieldName, inputRef, registerField, type]);
 
   return (
-    <ContainerInput width={width}>
+    <Container marginTop={marginTop} marginBottom={marginBottom} marginLeft={marginLeft} marginRight={marginRight}>
       {label ? <Label invalid={error ? 1 : 0}>{label}</Label> : null}
-      <InputElement
-        ref={inputRef}
-        defaultValue={defaultValue}
-        defaultChecked={defaultValue}
-        type={type}
-        width={width}
-        {...rest}
-      />
 
-      {error ? <Error>{error}</Error> : null}
-    </ContainerInput>
+      {Icon !== undefined ? (
+        <InnerContainer>
+          <StyledInput
+            ref={inputRef}
+            defaultValue={defaultValue}
+            defaultChecked={defaultValue}
+            gone
+            type={type}
+            {...rest}
+          />
+
+          <Icon onClick={onIconClick} />
+        </InnerContainer>
+      ) : (
+        <StyledInput ref={inputRef} defaultValue={defaultValue} defaultChecked={defaultValue} type={type} {...rest} />
+      )}
+
+      {error && <Error>{error}</Error>}
+
+      <Error>Algum problema</Error>
+    </Container>
   );
 };
 
-export default Input;
+export default forwardRef(Input);

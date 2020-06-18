@@ -4,11 +4,11 @@ export function isDateValid(dateString: string) {
   const targetDate = new Date(dateString);
   const targetDateInBrazil = new Date(targetDate.toLocaleString('pt-br'));
 
-  if (dateString.trim() === '') {
+  if (!(Object.prototype.toString.call(targetDate) === '[object Date]')) {
     return false;
   }
 
-  if (!(Object.prototype.toString.call(targetDate) === '[object Date]')) {
+  if (Number.isNaN(targetDate.getTime())) {
     return false;
   }
 

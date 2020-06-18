@@ -1,18 +1,33 @@
 import styled from 'styled-components';
-import { Div, Input } from '~/components/HTML';
 
-export const InnerContainer = styled(Div)`
+export const Container = styled.div`
   display: flex;
   align-items: center;
 
-  padding: 8px 12px;
+  border-radius: 5px;
+  border: 1px solid #ced4da;
+  background: #fff;
+
+  > div {
+    width: 100%;
+
+    input {
+      border: 0;
+      outline: 0;
+    }
+  }
+`;
+
+export const InnerContainer = styled.div`
+  display: flex;
+  align-items: center;
 
   border-radius: 5px;
   border: 1px solid #ced4da;
   background: #fff;
 `;
 
-export const CustomInput = styled(Input)`
+export const CustomInput = styled.input`
   background-color: #fff !important;
   width: 100%;
 

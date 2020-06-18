@@ -1,64 +1,36 @@
-/* eslint-disable react/jsx-props-no-spreading */
-import React, { useRef, useEffect, useState, useCallback } from 'react';
-import { useField } from '@unform/core';
+import React, { forwardRef, useCallback, useState, useMemo } from 'react';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 
-import { ContainerInput, Error, Label } from '../Default/styles';
-import { InnerContainer, CustomInput } from './styles';
+import { useSafeRef } from '~/hooks/native';
+import Input, { InputProps, InputRef } from '../Input';
 
-type InputAttributes = Omit<React.InputHTMLAttributes<HTMLInputElement>, 'defaultValue' | 'value'>;
-
-interface OwnProps {
-  name: string;
-  label?: string;
-  width?: number;
+interface Props extends Omit<InputProps, 'type'> {
+  initialVisible?: boolean;
 }
 
-type Props = OwnProps & InputAttributes;
+const PasswordInput = ({ initialVisible, ...rest }: Props, ref: InputRef) => {
+  const inputRef = useSafeRef(ref);
+  const [textVisible, setTextVisible] = useState(initialVisible || false);
 
-const PasswordInput = ({ name, label, width, ...rest }: Props) => {
-  const inputRef = useRef(null);
-  const { fieldName, registerField, defaultValue, error } = useField(name);
+  const handleIconClick = useCallback(() => {
+    setTextVisible(!textVisible);
+  }, [textVisible]);
 
-  const [visibleText, setVisibleText] = useState(false);
+  const passwordState = useMemo(() => {
+    if (textVisible) {
+      return {
+        icon: FiEye,
+        type: 'text',
+      };
+    }
 
-  useEffect(() => {
-    registerField({
-      name: fieldName,
-      ref: inputRef.current,
-      path: 'value',
-    });
-  }, [fieldName, registerField]);
+    return {
+      type: 'password',
+      icon: FiEyeOff,
+    };
+  }, [textVisible]);
 
-  const handleChangeTextVisibe = useCallback(() => {
-    setVisibleText(!visibleText);
-  }, [visibleText]);
-
-  return (
-    <ContainerInput width={width}>
-      {label ? <Label invalid={error ? 1 : 0}>{label}</Label> : null}
-
-      <InnerContainer>
-        <CustomInput
-          // invalid={error ? 1 : 0}
-          ref={inputRef}
-          defaultValue={defaultValue}
-          defaultChecked={defaultValue}
-          type={visibleText ? 'text' : 'password'}
-          width={width}
-          {...rest}
-        />
-
-        {visibleText ? (
-          <FiEye onClick={() => handleChangeTextVisibe()} />
-        ) : (
-          <FiEyeOff onClick={() => handleChangeTextVisibe()} />
-        )}
-      </InnerContainer>
-
-      {error ? <Error>{error}</Error> : null}
-    </ContainerInput>
-  );
+  return <Input ref={inputRef} onIconClick={handleIconClick} {...passwordState} {...rest} />;
 };
 
-export default PasswordInput;
+export default forwardRef(PasswordInput);

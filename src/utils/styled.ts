@@ -1,6 +1,6 @@
-export function pxNumber(value?: number, second = '') {
+export function pxNumber(value?: number) {
   if (!value) {
-    return second;
+    return '0px';
   }
 
   return `${value}px`;

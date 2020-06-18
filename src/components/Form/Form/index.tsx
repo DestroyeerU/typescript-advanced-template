@@ -1,22 +1,26 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, forwardRef } from 'react';
 
 import { SubmitHandler, FormHandles, FormProps as UnformProps } from '@unform/core';
 import * as Yup from 'yup';
 
-import { Container } from './styles';
+import { useSafeRef } from '~/hooks/native';
+import { StyledForm, StyledFormProps } from './styles';
 
 export declare type FormPros = FormHandles;
 
 interface OwnProps {
-  formRef: React.RefObject<FormHandles>;
-  schema: Yup.ObjectSchema;
+  children?: React.ReactNode;
   onSubmit: (data: object) => void;
-  clean?: boolean;
+  schema?: Yup.ObjectSchema;
+  keepErros?: boolean;
 }
 
-type Props = OwnProps & Omit<UnformProps, 'onSubmit' | 'ref'>;
+type Props = OwnProps & StyledFormProps & Omit<UnformProps, 'onSubmit' | 'ref'>;
+type Ref = React.Ref<FormHandles>;
 
-const Default = ({ formRef, schema, onSubmit: OnDataSubmit, initialData, clean, ...rest }: Props) => {
+const Form = ({ children, schema, onSubmit, keepErros, ...rest }: Props, ref: Ref) => {
+  const formRef = useSafeRef(ref);
+
   const setErrorsMessages = useCallback(
     (err: Yup.ValidationError) => {
       const errorMessages = {} as { [key: string]: string };
@@ -36,17 +40,13 @@ const Default = ({ formRef, schema, onSubmit: OnDataSubmit, initialData, clean, 
     (data, { reset }) => {
       async function validateFields() {
         try {
-          await schema.validate(data, {
+          await schema?.validate(data, {
             abortEarly: false,
           });
 
-          OnDataSubmit(data);
+          onSubmit(data);
 
-          if (!clean) return;
-
-          reset();
-
-          if (formRef.current) {
+          if (!keepErros && formRef.current) {
             formRef.current.setErrors({});
           }
         } catch (err) {
@@ -58,10 +58,14 @@ const Default = ({ formRef, schema, onSubmit: OnDataSubmit, initialData, clean, 
 
       validateFields();
     },
-    [OnDataSubmit, clean, formRef, schema, setErrorsMessages]
+    [formRef, keepErros, onSubmit, schema, setErrorsMessages]
   );
 
-  return <Container ref={formRef} onSubmit={handleSubmit} initialData={initialData} {...rest} />;
+  return (
+    <StyledForm ref={formRef} onSubmit={handleSubmit} {...rest}>
+      {children}
+    </StyledForm>
+  );
 };
 
-export default Default;
+export default forwardRef(Form);
