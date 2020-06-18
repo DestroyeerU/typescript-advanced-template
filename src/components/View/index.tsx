@@ -3,29 +3,28 @@ import React from 'react';
 import { Container, NoDataContainer, NoDataText, LoadingSpinner } from './styles';
 
 interface OwnProps {
+  children?: React.ReactNode;
   loading: boolean;
   hasData: boolean;
-  children?: React.ReactNode;
 }
 
-const View = ({ loading, hasData, children }: OwnProps) => (
-  <>
-    {loading ? (
+const View = ({ loading, hasData, children }: OwnProps) => {
+  if (loading) {
+    return (
       <Container>
         <LoadingSpinner />
       </Container>
-    ) : (
-      <>
-        {hasData ? (
-          <>{children}</>
-        ) : (
-          <NoDataContainer>
-            <NoDataText>Nenhum dado encontrado</NoDataText>
-          </NoDataContainer>
-        )}
-      </>
-    )}
-  </>
-);
+    );
+  }
 
+  if (!hasData) {
+    return (
+      <NoDataContainer>
+        <NoDataText>Nenhum dado encontrado</NoDataText>
+      </NoDataContainer>
+    );
+  }
+
+  return <>{children}</>;
+};
 export default View;

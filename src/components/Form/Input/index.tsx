@@ -54,8 +54,6 @@ const Input = (
       )}
 
       {error && <Error>{error}</Error>}
-
-      <Error>Algum problema</Error>
     </Container>
   );
 };

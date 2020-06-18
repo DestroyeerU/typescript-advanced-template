@@ -9,7 +9,7 @@ export default (reducers: typeof rootReducer) => {
       key: 'appNameKey',
       storage,
 
-      // ducks folder to persist
+      // ducks to persist (folder name)
       whitelist: [],
     },
     reducers

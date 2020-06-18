@@ -9,19 +9,21 @@ interface OwnProps {
 type Props = RouteProps & OwnProps;
 
 export default function Route({ isPublic, isToKeep, ...rest }: Props) {
+  // Need to check if its first time?
+
   // update with signed value on your state
   const signed = true;
 
-  if (!isToKeep) {
-    if (!signed && !isPublic) {
-      return <Redirect to="/" />;
-    }
+  if (isToKeep) {
+    return <RouteWrapper {...rest} />;
+  }
 
-    if (signed && isPublic) {
-      return <Redirect to="/categorias" />;
-    }
-  } else if (signed) {
-    return <Redirect to="/categorias" />;
+  if (isPublic && signed) {
+    return <Redirect to="/dashboard" />;
+  }
+
+  if (!isPublic && !signed) {
+    return <Redirect to="/login" />;
   }
 
   return <RouteWrapper {...rest} />;
