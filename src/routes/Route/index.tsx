@@ -8,7 +8,7 @@ interface OwnProps {
 
 type Props = RouteProps & OwnProps;
 
-export default function Route({ isPublic, isToKeep, ...rest }: Props) {
+const Route = ({ isPublic, isToKeep, ...rest }: Props) => {
   // Need to check if its first time?
 
   // update with signed value on your state
@@ -27,4 +27,6 @@ export default function Route({ isPublic, isToKeep, ...rest }: Props) {
   }
 
   return <RouteWrapper {...rest} />;
-}
+};
+
+export default Route;
