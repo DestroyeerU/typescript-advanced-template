@@ -1,4 +1,5 @@
 import styled, { keyframes } from 'styled-components';
+
 import { FiLoader } from 'react-icons/fi';
 
 export const Container = styled.div`

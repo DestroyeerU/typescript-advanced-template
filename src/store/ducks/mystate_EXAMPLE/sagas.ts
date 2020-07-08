@@ -1,7 +1,7 @@
 import { all, takeLatest } from 'redux-saga/effects';
 
-import { StateTypes } from './types';
 import { addRequest } from './actions';
+import { StateTypes } from './types';
 
 function* add({ payload }: ReturnType<typeof addRequest>) {
   // Code here

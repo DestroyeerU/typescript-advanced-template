@@ -2,6 +2,7 @@ import React, { forwardRef, useCallback, useState, useMemo } from 'react';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 
 import { useSafeRef } from '~/hooks/native';
+
 import Input, { InputProps, InputRef } from '../Input';
 
 interface Props extends Omit<InputProps, 'type'> {

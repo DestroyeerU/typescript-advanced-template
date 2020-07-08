@@ -4,6 +4,7 @@ import { SubmitHandler, FormHandles, FormProps as UnformProps } from '@unform/co
 import * as Yup from 'yup';
 
 import { useSafeRef } from '~/hooks/native';
+
 import { StyledForm, StyledFormProps } from './styles';
 
 export declare type FormPros = FormHandles;
@@ -37,7 +38,8 @@ const Form = ({ children, schema, onSubmit, keepErros, ...rest }: Props, ref: Re
   );
 
   const handleSubmit: SubmitHandler<object> = useCallback(
-    (data, { reset }) => {
+    (data) => {
+      // (data, { reset }) => {
       async function validateFields() {
         try {
           await schema?.validate(data, {

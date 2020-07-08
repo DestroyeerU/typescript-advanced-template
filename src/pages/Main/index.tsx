@@ -1,7 +1,8 @@
 import React from 'react';
 
-import { Container } from './styles';
 import { Form, PasswordInput } from '~/components/Form';
+
+import { Container } from './styles';
 
 const Main = () => {
   return (

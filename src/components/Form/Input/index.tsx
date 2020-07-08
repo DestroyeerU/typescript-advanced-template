@@ -1,8 +1,10 @@
 import React, { useEffect, forwardRef } from 'react';
+import { IconType } from 'react-icons/lib';
+
 import { useField } from '@unform/core';
 
-import { IconType } from 'react-icons/lib';
 import { useSafeRef } from '~/hooks/native';
+
 import { Container, ContainerProps, StyledInput, Error, Label, InnerContainer } from './styles';
 
 type InputAttributes = Omit<React.InputHTMLAttributes<HTMLInputElement>, 'defaultValue' | 'value' | 'width'>;
