@@ -7,6 +7,6 @@ export enum PersistTypes {
 export interface Persist {
   type: typeof PersistTypes.REHYDRATE;
   payload: {
-    myState_EXAMPLE: MyState;
+    myState: MyState; // Delete this line after remove 'mystate_EXAMPLE' duck
   };
 }
