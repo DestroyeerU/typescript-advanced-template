@@ -11,10 +11,10 @@ type Props = RouteProps & OwnProps;
 const Route = ({ isPublic, isToKeep, ...rest }: Props) => {
   // Need to check if its first time?
 
-  // update with signed value on your state
+  // Update with signed value on your state
   const signed = true;
 
-  if (isToKeep) {
+  if (!isToKeep) {
     return <RouteWrapper {...rest} />;
   }
 
