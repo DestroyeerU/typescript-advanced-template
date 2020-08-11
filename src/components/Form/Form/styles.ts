@@ -7,5 +7,5 @@ import { Size, useSize } from '~/hooks/styled';
 export type StyledFormProps = Size;
 
 export const StyledForm = styled(Unform)`
-  ${useSize}
+  ${useSize};
 `;

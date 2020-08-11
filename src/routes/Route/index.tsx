@@ -14,7 +14,7 @@ const Route = ({ isPublic, isToKeep, ...rest }: Props) => {
   // Update with signed value on your state
   const signed = true;
 
-  if (!isToKeep) {
+  if (isToKeep) {
     return <RouteWrapper {...rest} />;
   }
 
