@@ -17,7 +17,8 @@ interface OwnProps {
   onIconClick?: () => void;
 }
 
-export type InputProps = OwnProps & ContainerProps & InputAttributes;
+type DefaultInputProps = OwnProps & ContainerProps & InputAttributes;
+export type InputProps = Omit<DefaultInputProps, 'icon'>;
 export type InputRef = React.Ref<HTMLInputElement>;
 
 const DefaultInput = (
@@ -33,7 +34,7 @@ const DefaultInput = (
     icon: Icon,
     onIconClick,
     ...rest
-  }: InputProps,
+  }: DefaultInputProps,
   ref: InputRef
 ) => {
   const inputRef = useSafeRef(ref);
