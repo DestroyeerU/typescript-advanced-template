@@ -1,6 +1,3 @@
-/* eslint-disable no-param-reassign */
-/* eslint-disable @typescript-eslint/no-var-requires */
-
 const path = require('path');
 
 const baseUrl = path.resolve(__dirname, 'src');

@@ -1,6 +1,6 @@
 {
   "name": "test",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "private": true,
   "scripts": {
     "start": "react-app-rewired start",
@@ -22,6 +22,7 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
     "styled-components": "^5.1.0",
+    "swr": "^0.3.1",
     "yup": "^0.29.1"
   },
   "devDependencies": {
