@@ -36,18 +36,8 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
-    'no-new': 'off',
-    'no-prototype-builtins': 'off',
-    'no-restricted-syntax': 'off',
-    'no-useless-constructor': 'off',
-    'no-param-reassign': 'off',
-    'no-underscore-dangle': 'off',
-
-    'max-classes-per-file': 'off',
-    'class-methods-use-this': 'off',
-
-    'import/prefer-default-export': 'off',
     'prettier/prettier': 'error',
+    'import/prefer-default-export': 'off',
 
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/explicit-member-accessibility': 'off',
@@ -56,6 +46,7 @@ module.exports = {
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'error',
     'react/jsx-props-no-spreading': 'off',
+    'react/prop-types': 'off',
 
     '@typescript-eslint/no-unused-vars': [
       'error',
