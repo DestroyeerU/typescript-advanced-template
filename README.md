@@ -2,7 +2,6 @@
 
 - [x] Typescript settings
 - [x] Eslint/Prettier
-- [x] Redux/Redux Sagas `typescript integration`
 - [x] Styled components
 
 
