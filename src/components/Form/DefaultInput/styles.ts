@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import { useMargin, Margin } from '~/hooks/styled';
+import { useMargin, Margin } from '@hooks/styled';
 
 interface SharedProps {
   invalid?: number;

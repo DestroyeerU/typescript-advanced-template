@@ -3,7 +3,7 @@ import React, { useCallback, forwardRef } from 'react';
 import { SubmitHandler, FormHandles, FormProps as UnformProps } from '@unform/core';
 import * as Yup from 'yup';
 
-import { useSafeRef } from '~/hooks/native';
+import { useSafeRef } from '@hooks/native';
 
 import { StyledForm, StyledFormProps } from './styles';
 

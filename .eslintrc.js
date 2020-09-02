@@ -69,16 +69,15 @@ module.exports = {
       {
         newlinesBetween: 'always', // new line between groups
         groups: [
-          '/^styled-components/',
           '/^react/',
           'module',
-          '/^~/hooks/',
-          '/^~/services/',
-          '/^~/store/',
-          '/^~/utils/',
-          '/^~/styles/',
-          '/^~/components/',
-          '/^~/',
+          '/^@types/',
+          '/^@pages/',
+          '/^@services/',
+          '/^@components/',
+          '/^@hooks/',
+          '/^@utils/',
+          '/^@styles/',
           ['parent', 'sibling', 'index'],
         ],
         alphabetize: { order: 'asc', ignoreCase: true },

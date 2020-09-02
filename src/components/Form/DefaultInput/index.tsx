@@ -3,7 +3,7 @@ import { IconType } from 'react-icons/lib';
 
 import { useField } from '@unform/core';
 
-import { useSafeRef } from '~/hooks/native';
+import { useSafeRef } from '@hooks/native';
 
 import { Container, ContainerProps, Error, Label, InnerContainer } from './styles';
 
