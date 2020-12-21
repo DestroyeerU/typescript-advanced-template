@@ -16,11 +16,11 @@ export interface Size {
 }
 
 export const useMargin = (props: Margin) => css`
-  margin-top: ${margin(props.marginTop)};
-  margin-bottom: ${margin(props.marginBottom)};
+  margin-top: ${props.marginTop && margin(props.marginTop)};
+  margin-bottom: ${props.marginBottom && margin(props.marginBottom)};
 
-  margin-right: ${margin(props.marginRight)};
-  margin-left: ${margin(props.marginLeft)};
+  margin-right: ${props.marginRight && margin(props.marginRight)};
+  margin-left: ${props.marginLeft && margin(props.marginLeft)};
 `;
 
 export const useSize = (props: Size) => css`
