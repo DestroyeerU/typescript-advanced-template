@@ -1,5 +1,4 @@
 import React, { useEffect, forwardRef, useMemo } from 'react';
-import { IconType } from 'react-icons/lib';
 
 import { useField } from '@unform/core';
 
@@ -11,17 +10,13 @@ type InputAttributes = Omit<React.InputHTMLAttributes<HTMLInputElement>, 'defaul
 
 interface OwnProps {
   name: string;
-  label?: string;
   as?: typeof DefaultStyledInput;
-  icon?: IconType;
-  onIconClick?: () => void;
 }
 
-type DefaultInputProps = OwnProps & InputAttributes;
-export type InputProps = DefaultInputProps;
+export type InputProps = OwnProps & InputAttributes;
 export type InputRef = React.Ref<HTMLInputElement>;
 
-const DefaultInput = ({ name, as: StyledInput, type, ...rest }: DefaultInputProps, ref: InputRef) => {
+const DefaultInput = ({ name, as: StyledInput, type, ...rest }: InputProps, ref: InputRef) => {
   const inputRef = useSafeRef(ref);
   const { fieldName, registerField, defaultValue, error } = useField(name);
 

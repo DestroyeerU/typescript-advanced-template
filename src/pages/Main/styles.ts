@@ -22,20 +22,26 @@ export const StyledForm = styled(Unform)`
       margin-top: 0px;
     }
   }
+
+  span {
+    margin: 4px auto 0 2px;
+
+    font-size: 1.4rem;
+
+    color: #e63946;
+  }
 `;
 
 export const ConfirmButton = styled.button`
   width: 100%;
   max-width: 350px;
 
-  margin-top: 20px;
-
-  padding: 19px;
+  margin-top: 50px;
+  padding: 17px;
 
   font-size: 1.8rem;
   font-weight: 700;
 
   border-radius: 4px;
-
   background-color: ${colors.primary};
 `;

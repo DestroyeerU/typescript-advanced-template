@@ -8,24 +8,24 @@ import Input from '@components/Input';
 import { ConfirmButton, StyledForm } from './styles';
 
 interface FormSubmitData {
-  name: string;
   email: string;
+  password: string;
 }
 
 const formSchema = Yup.object().shape({
-  name: Yup.string().required('Este campo é obrigatório'),
   email: Yup.string().email('Email inválido').required('Este campo é obrigatório'),
+  password: Yup.string().required('Este campo é obrigatório'),
 });
 
 const Main: React.FC = () => {
-  const handleSubmit = useCallback((data: FormSubmitData) => {
+  const handleSubmit = useCallback(async (data: FormSubmitData) => {
     console.log(data);
   }, []);
 
   return (
     <Form as={StyledForm} onSubmit={handleSubmit} schema={formSchema}>
-      <Input name="name" placeholder="Digite seu nome" autoFocus />
-      <Input name="email" placeholder="Digite seu email" />
+      <Input name="email" placeholder="Digite seu email" autoFocus />
+      <Input name="password" placeholder="Digite sua senha" type="password" />
       <ConfirmButton type="submit">CONFIRMAR</ConfirmButton>
     </Form>
   );

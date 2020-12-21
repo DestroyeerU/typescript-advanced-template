@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 import React, { useCallback, forwardRef, useMemo } from 'react';
 
 import { SubmitHandler, FormHandles, FormProps as UnformProps } from '@unform/core';
@@ -6,61 +7,45 @@ import * as Yup from 'yup';
 
 import { useSafeRef } from '@hooks/native';
 
+import { setErrorsMessages, validateSchema } from '@utils/form';
+
 export declare type FormPros = FormHandles;
 
 interface OwnProps {
-  children?: React.ReactNode;
-  onSubmit: (data: any) => void;
-  schema?: Yup.ObjectSchema;
   as?: typeof Unform;
-  keepErros?: boolean;
+  children?: React.ReactNode;
+
+  onSubmit: (data: any) => void;
+
+  schema?: Yup.ObjectSchema;
+  customValidation?: boolean;
 }
 
 type Props = OwnProps & Omit<UnformProps, 'onSubmit' | 'ref'>;
 type Ref = React.Ref<FormHandles>;
 
-const Form = ({ children, schema, onSubmit, keepErros, as: StyledForm, ...rest }: Props, ref: Ref) => {
+const Form = ({ children, schema, onSubmit, customValidation, as: StyledForm, ...rest }: Props, ref: Ref) => {
   const formRef = useSafeRef(ref);
 
-  const setErrorsMessages = useCallback(
-    (err: Yup.ValidationError) => {
-      const errorMessages = {} as { [key: string]: string };
-
-      err.inner.forEach((error) => {
-        errorMessages[error.path] = error.message;
-      });
-
-      if (formRef.current) {
-        formRef.current.setErrors(errorMessages);
-      }
-    },
-    [formRef]
-  );
-
   const handleSubmit: SubmitHandler<object> = useCallback(
-    (data) => {
-      // (data, { reset }) => {
-      async function validateFields() {
-        try {
-          await schema?.validate(data, {
-            abortEarly: false,
-          });
-
-          onSubmit(data);
-
-          if (!keepErros && formRef.current) {
-            formRef.current.setErrors({});
-          }
-        } catch (err) {
-          if (err instanceof Yup.ValidationError) {
-            setErrorsMessages(err);
-          }
-        }
+    async (data) => {
+      if (customValidation) {
+        onSubmit(data);
+        return;
       }
 
-      validateFields();
+      const schemaToValidate = schema as Yup.ObjectSchema;
+      const errors = await validateSchema(schemaToValidate, data);
+
+      if (errors) {
+        setErrorsMessages(formRef, errors);
+      } else {
+        formRef.current?.setErrors({});
+      }
+
+      onSubmit(data);
     },
-    [formRef, keepErros, onSubmit, schema, setErrorsMessages]
+    [customValidation, formRef, onSubmit, schema]
   );
 
   const FormComponent = useMemo(() => StyledForm || Unform, [StyledForm]);
