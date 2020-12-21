@@ -5,7 +5,7 @@ import { useField } from '@unform/core';
 
 import { useSafeRef } from '@hooks/native';
 
-import { DefaultStyledInput } from './styles';
+import { DefaultStyledInput, DefaultStyledError } from './styles';
 
 type InputAttributes = Omit<React.InputHTMLAttributes<HTMLInputElement>, 'defaultValue' | 'value' | 'width'>;
 
@@ -36,7 +36,10 @@ const DefaultInput = ({ name, as: StyledInput, type, ...rest }: DefaultInputProp
   const InputComponent = useMemo(() => StyledInput || DefaultStyledInput, [StyledInput]);
 
   return (
-    <InputComponent ref={inputRef} defaultValue={defaultValue} defaultChecked={defaultValue} type={type} {...rest} />
+    <>
+      <InputComponent ref={inputRef} defaultValue={defaultValue} defaultChecked={defaultValue} type={type} {...rest} />
+      {error && <DefaultStyledError>{error}</DefaultStyledError>}
+    </>
   );
 };
 

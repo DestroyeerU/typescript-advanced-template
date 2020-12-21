@@ -16,10 +16,10 @@ export const StyledForm = styled(Unform)`
   background-color: #1a1d1e;
 
   input {
-    margin-bottom: 20px;
+    margin-top: 20px;
 
-    &:last-of-type {
-      margin-bottom: 0px;
+    &:first-child {
+      margin-top: 0px;
     }
   }
 `;

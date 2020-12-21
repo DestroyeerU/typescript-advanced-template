@@ -10,7 +10,7 @@ export declare type FormPros = FormHandles;
 
 interface OwnProps {
   children?: React.ReactNode;
-  onSubmit: (data: object) => void;
+  onSubmit: (data: any) => void;
   schema?: Yup.ObjectSchema;
   as?: typeof Unform;
   keepErros?: boolean;
