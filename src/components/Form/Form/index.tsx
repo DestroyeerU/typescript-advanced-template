@@ -1,11 +1,10 @@
-import React, { useCallback, forwardRef } from 'react';
+import React, { useCallback, forwardRef, useMemo } from 'react';
 
 import { SubmitHandler, FormHandles, FormProps as UnformProps } from '@unform/core';
+import { Form as Unform } from '@unform/web';
 import * as Yup from 'yup';
 
 import { useSafeRef } from '@hooks/native';
-
-import { StyledForm, StyledFormProps } from './styles';
 
 export declare type FormPros = FormHandles;
 
@@ -13,13 +12,14 @@ interface OwnProps {
   children?: React.ReactNode;
   onSubmit: (data: object) => void;
   schema?: Yup.ObjectSchema;
+  as?: typeof Unform;
   keepErros?: boolean;
 }
 
-type Props = OwnProps & StyledFormProps & Omit<UnformProps, 'onSubmit' | 'ref'>;
+type Props = OwnProps & Omit<UnformProps, 'onSubmit' | 'ref'>;
 type Ref = React.Ref<FormHandles>;
 
-const Form = ({ children, schema, onSubmit, keepErros, ...rest }: Props, ref: Ref) => {
+const Form = ({ children, schema, onSubmit, keepErros, as: StyledForm, ...rest }: Props, ref: Ref) => {
   const formRef = useSafeRef(ref);
 
   const setErrorsMessages = useCallback(
@@ -63,10 +63,12 @@ const Form = ({ children, schema, onSubmit, keepErros, ...rest }: Props, ref: Re
     [formRef, keepErros, onSubmit, schema, setErrorsMessages]
   );
 
+  const FormComponent = useMemo(() => StyledForm || Unform, [StyledForm]);
+
   return (
-    <StyledForm ref={formRef} onSubmit={handleSubmit} {...rest}>
+    <FormComponent ref={formRef} onSubmit={handleSubmit} {...rest}>
       {children}
-    </StyledForm>
+    </FormComponent>
   );
 };
 
