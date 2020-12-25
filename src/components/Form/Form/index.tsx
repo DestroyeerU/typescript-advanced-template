@@ -39,10 +39,10 @@ const Form = ({ children, schema, onSubmit, customValidation, as: StyledForm, ..
 
       if (errors) {
         setErrorsMessages(formRef, errors);
-      } else {
-        formRef.current?.setErrors({});
+        return;
       }
 
+      formRef.current?.setErrors({});
       onSubmit(data);
     },
     [customValidation, formRef, onSubmit, schema]
